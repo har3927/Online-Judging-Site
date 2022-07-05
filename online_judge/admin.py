@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Users,Problems,Solutions,TestCases
+from .models import Problem,Solution,TestCase
 # Register your models here.
-admin.site.register(Users)
-admin.site.register(Problems)
-admin.site.register(Solutions)
-admin.site.register(TestCases)
+admin.site.register(Problem)
+admin.site.register(Solution)
+admin.site.register(TestCase)
