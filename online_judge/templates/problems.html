@@ -1,0 +1,10 @@
+<h1 align = "center">Problems</h1>
+{% if problem_list %}
+    <ol>
+        {% for problem in problem_list %}
+            <li><a href = "{% url 'online_judge:problem_detail' problem.id %}"> {{ problem.name }} </a></li>
+        {% endfor %}
+    </ol>
+{% else %}
+    <p>Nothing to Show.<p>
+{% endif %}

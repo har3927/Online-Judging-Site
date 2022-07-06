@@ -1,0 +1,25 @@
+<h1 align = "center">{{ problem.name }}</h1>
+<h3>Problem Statement : </h3>
+<p>{{problem.statement}}</p>
+<h3>Test Cases : </h3>
+<ul>
+    {% for testcase in problem.testcases_set.all %}
+        <li>Input : {{ testcase.input }}</li>
+        <li>Output : {{ testcase.output }}</li>
+        <br></br>
+    {% endfor %}
+</ul>
+
+<form action = "{% url 'online_judge:submit' problem.id %}" method = "post"> 
+    {% csrf_token %}
+        <fieldset>
+            <h3 align = "center">Submit your code here.. </h3>
+            <div>
+                <textarea rows = "10" cols = "200"></textarea>
+            </div>
+            <div align = "center" mx = "10">
+                <input type = "file">
+                <input type = "submit">
+            </div>
+        </fieldset>
+</form>
