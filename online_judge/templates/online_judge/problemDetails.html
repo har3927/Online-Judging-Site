@@ -10,7 +10,7 @@
     {% endfor %}
 </ul>
 
-<form action = "{% url 'online_judge:submit' problem.id %}" method = "post"> 
+<form action = "{% url 'submit' problem.id %}" method = "post"> 
     {% csrf_token %}
         <fieldset>
             <h3 align = "center">Submit your code here.. </h3>
