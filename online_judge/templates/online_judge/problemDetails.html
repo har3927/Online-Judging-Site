@@ -1,4 +1,14 @@
+
 <h1 align = "center">{{ problem.name }}</h1>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 <h3>Problem Statement : </h3>
 <p>{{problem.statement}}</p>
 <h3>Test Cases : </h3>
@@ -10,16 +20,18 @@
     {% endfor %}
 </ul>
 
-<form action = "{% url 'submit' problem.id %}" method = "post"> 
+{%if request.user.is_authenticated%}
+<form action = "{% url 'submit' problem.id %}" method = "POST" enctype = "multipart/form-data">
     {% csrf_token %}
         <fieldset>
             <h3 align = "center">Submit your code here.. </h3>
             <div>
-                <textarea rows = "10" cols = "200"></textarea>
+                <textarea rows = "10"  cols = "200" name = "typedsol" id = 'typedsol' ></textarea>
             </div>
             <div align = "center" mx = "10">
-                <input type = "file">
-                <input type = "submit">
+                <input type = "file" id = "solution" name = "solution" >
+                <input type = "submit" value = "Submit">
             </div>
         </fieldset>
-</form>
+    </form>
+{% endif %}
