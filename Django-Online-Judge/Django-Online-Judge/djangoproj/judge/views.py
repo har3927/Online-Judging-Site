@@ -38,7 +38,7 @@ def submit(request, question_id):
         _compile = subprocess.run('g++ C:/django/onlinejudge/project/django-online-judge/django-online-judge/djangoproj/temp.cpp', stdout=subprocess.PIPE)
 
     #_compile = subprocess.run(COMPILE)
-    if (_compile.returncode != 0):
+    if (_compile.returncode == 1):
         verdict = Solution.Verdict.COMPILATION_ERROR
     else:
         tests = TestCase.objects.filter(problem__id = question_id)
@@ -70,6 +70,8 @@ def submit(request, question_id):
     sol.save()
 
     return HttpResponseRedirect(reverse('leaderboard'))
+    #----------
+
 @login_required(login_url='users:login')
 def leaderboard(request):
     recent_submissions = Solution.objects.all().order_by('-submittedAt')[:10]
