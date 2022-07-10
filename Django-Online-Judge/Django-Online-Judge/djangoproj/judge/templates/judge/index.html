@@ -1,0 +1,24 @@
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: #9EE3B4;
+        }
+    </style>
+</head>
+{%if request.user.is_authenticated%}
+    <li> <a href = "{% url 'users:logout' %} ">Log Out</a></li>
+{% else %}
+    <li> <a href = "{% url 'users:login' %} ">Log In</a></li>
+    <li> <a href = "{% url 'users:register' %} ">Sign Up</a></li>
+{% endif %}
+
+<body align='center'>
+    <h1>Welcome to the online judge</h1>
+    <form>
+        <button formaction="/problemset">Click here to practice</button>
+    </form>
+</body>
+
+</html>

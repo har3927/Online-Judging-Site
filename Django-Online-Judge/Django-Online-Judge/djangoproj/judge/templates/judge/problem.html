@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <style>
+            body {
+                background-color: #9EE3B4;
+            }
+        </style
+    </head>
+    <body align = 'center'>
+        <h2>{{ problem.name }}</h2>
+        <p>{{ problem.statement }}</p>
+        <form action="{% url 'detail' problem.id %}" name = "code-form" method="post">
+            {% csrf_token %}
+            <textarea rows="30" cols="80" name="code">//Type your code here...</textarea>
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+        <form>
+            <button formaction="/problemset">Return to problemset</button>
+        </form>
+    </body>
+</html>

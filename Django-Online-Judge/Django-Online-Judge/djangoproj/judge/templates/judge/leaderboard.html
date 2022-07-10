@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: #9EE3B4;
+        }
+
+        #submissions {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+            margin: auto;
+            border: 2px solid white;
+        }
+
+        #submissions td,
+        #submissions th {
+            border: 2px solid white;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #submissions tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #submissions tr:hover {
+            background-color: #ddd;
+        }
+
+        #submissions th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+</head>
+
+<body align='center'>
+    <h1>Leaderboard</h1>
+    <form>
+        <button formaction="/problemset">Return to problemset</button>
+    </form>
+    <table id="submissions">
+        <thead>
+            <tr>
+                <th>Verdict</th>
+                <th>Problem</th>
+                <th>Submitted At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for res in result %}
+            <tr>
+                <td>{{res.verdict}}</td>
+                <td><a href="{% url 'detail' res.problem.id %}">{{res.problem.code}}</a></td>
+                <td>{{res.submittedAt}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- <ul>
+    {% for res in result %}
+        <li>{{ res.problem.code }} | {{ res.verdict }}</li>
+    {% endfor %}
+    </ul> -->
+</body>
+
+</html>
