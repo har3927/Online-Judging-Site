@@ -13,7 +13,7 @@ def login_user(request):
         if user is not None:
             login(request, user)
             messages.info(request , 'Logged in successfully..')
-            return redirect('/index.html')
+            return redirect('/problemset')
         else:
             messages.info(request , 'The username or password is incorrect..')
             return redirect('/auth/login_user')
@@ -37,4 +37,4 @@ def register_user(request):
 def logout_user(request):
     logout(request)
     messages.success(request, 'Successfully logged out..')
-    return redirect("/index.html")
+    return redirect('')

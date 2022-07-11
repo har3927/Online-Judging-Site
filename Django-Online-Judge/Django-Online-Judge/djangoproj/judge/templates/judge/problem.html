@@ -9,6 +9,18 @@
     <body align = 'center'>
         <h2>{{ problem.name }}</h2>
         <p>{{ problem.statement }}</p>
+        <div id = "testcase">
+
+    <h3>Test Cases : </h3>
+    <ul>
+        {% for testcase in problem.testcases_set.all%}
+        <li>Input : {{ testcase.input }}</li>
+        <li>Output : {{ testcase.output }}</li>
+        <br></br>
+        {% endfor %}
+    </ul>
+</div>
+        {%if request.user.is_authenticated%}
         <form action="{% url 'detail' problem.id %}" name = "code-form" method="post">
             {% csrf_token %}
             <textarea rows="30" cols="80" name="code">//Type your code here...</textarea>
@@ -18,5 +30,8 @@
         <form>
             <button formaction="/problemset">Return to problemset</button>
         </form>
+        {%else%}
+        <h2 align='center'>Login to Submit Ur Code</h2>
+        {% endif %}
     </body>
 </html>

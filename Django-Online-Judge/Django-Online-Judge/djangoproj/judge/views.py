@@ -9,9 +9,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 # COMPILE = ["g++", "temp.cpp"]
-COMPILE=["g++","C:/django/onlinejudge/project/django-online-judge/django-online-judge/djangoproj/temp.cpp"]
+COMPILE='g++ C:/django/onlinejudge/project/django-online-judge/django-online-judge/djangoproj/temp.cpp'
 # RUN = ["./a.out"]
-RUN = ["./a.out"]
+RUN = './a.exe'
 
 def index(request):
     return render(request, 'judge/index.html')
@@ -35,7 +35,7 @@ def submit(request, question_id):
     with open('C:/django/onlinejudge/project/django-online-judge/django-online-judge/djangoproj/temp.cpp', 'w') as file:
         file.write(code)
 
-        _compile = subprocess.run('g++ C:/django/onlinejudge/project/django-online-judge/django-online-judge/djangoproj/temp.cpp', stdout=subprocess.PIPE)
+    _compile = subprocess.run('g++ C:/django/onlinejudge/project/django-online-judge/django-online-judge/djangoproj/temp.cpp', stdout=subprocess.PIPE)
 
     #_compile = subprocess.run(COMPILE)
     if (_compile.returncode == 1):
@@ -46,9 +46,13 @@ def submit(request, question_id):
         for test in tests:
             input = test.input
             expected = test.output
+            expected=expected.replace("\r\n", "\n").replace("\r", "\n")
             try:
                 _run = subprocess.run(RUN, stdout=subprocess.PIPE, input=input, encoding='ascii', timeout=1, check=True)
                 actual = _run.stdout
+                actual =actual.strip().rstrip("/n").strip()
+                print(expected.encode())
+                print(actual.encode())
                 if (expected != actual):
                     verdict = Solution.Verdict.Wrong_Output
                     break

@@ -8,7 +8,7 @@ class Problem(models.Model):
         hard = "HARD"
 
     name = models.CharField(max_length=50)
-    statement = models.CharField(max_length=2500)
+    statement = models.TextField()
     code = models.CharField(max_length=10)
     difficulty = models.CharField(
         max_length=6,
@@ -39,8 +39,8 @@ class Solution(models.Model):
         return self.problem.code + "_" + self.verdict
 
 class TestCase(models.Model):
-    input = models.CharField(max_length=500)
-    output = models.CharField(max_length=500)
+    input = models.TextField()
+    output = models.TextField()
     problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
 
     def __str__(self):
