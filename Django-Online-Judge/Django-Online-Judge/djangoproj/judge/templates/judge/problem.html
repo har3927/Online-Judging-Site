@@ -4,31 +4,36 @@
             body {
                 background-color: #9EE3B4;
             }
+            .working-btn {
+           background-color: #ddd;
+           border: none;
+           color: black;
+           padding: 10px 20px;
+           text-align: center;
+           font-size: 16px;
+           margin: 4px 2px;
+           transition: 0.3s;
+         }
+
+         .working-btn:hover {
+           background-color: #3e8e41;
+           color: white;
+         }
         </style
     </head>
     <body align = 'center'>
         <h2>{{ problem.name }}</h2>
         <p>{{ problem.statement }}</p>
-        <div id = "testcase">
 
-    <h3>Test Cases : </h3>
-    <ul>
-        {% for testcase in problem.testcases_set.all%}
-        <li>Input : {{ testcase.input }}</li>
-        <li>Output : {{ testcase.output }}</li>
-        <br></br>
-        {% endfor %}
-    </ul>
-</div>
         {%if request.user.is_authenticated%}
         <form action="{% url 'detail' problem.id %}" name = "code-form" method="post">
             {% csrf_token %}
             <textarea rows="30" cols="80" name="code">//Type your code here...</textarea>
             <br><br>
-            <input type="submit" value="Submit">
+            <input class="working-btn" type="submit" value="Submit">
         </form>
         <form>
-            <button formaction="/problemset">Return to problemset</button>
+            <button class="working-btn" formaction="/problemset">Return to problemset</button>
         </form>
         {%else%}
         <h2 align='center'>Login to Submit Ur Code</h2>

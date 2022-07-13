@@ -1,25 +1,71 @@
 <html>
 
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <style>
         body {
             background-color: #9EE3B4;
+            text-align: center;
+
         }
+        h1{
+          padding: 40px;
+        }
+      #messages{
+       background-color: grey;
+       color: #fff;
+       padding: 10px;
+       margin-top: 10px;
+   }
+   .btn-text{
+     text-decoration: none;
+     color:#fff;
+   }
+   .working-btn {
+  background-color: #ddd;
+  border: none;
+  color: black;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition: 0.3s;
+}
+
+.working-btn:hover {
+  background-color: #3e8e41;
+  color: white;
+}
     </style>
 </head>
-{%if request.user.is_authenticated%}
-    <li> <a href = "{% url 'users:logout' %} ">Log Out</a></li>
-{% else %}
-    <li> <a href = "{% url 'users:login' %} ">Log In</a></li>
-    <li> <a href = "{% url 'users:register' %} ">Sign Up</a></li>
+{% if messages %}
+    {% for message in messages %}
+        <p id="messages">{{message}}</p>
+    {% endfor %}
 {% endif %}
 
-<body align='center'>
-    <h1>Welcome to the online judge</h1>
-    <form>
-        <button formaction="/problemset">Click here to practice</button>
-    </form>{% csrf_token %}
+{%if request.user.is_authenticated%}
 
-</body>
+<p align="right">
+
+        <button type="button" class="btn btn-outline-success"><a class="btn-text" href = "{% url 'users:logout' %} ">Log Out</a></button>
+      </p>
+
+{% else %}
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <button class="btn btn-outline-success me-md-2" type="button"><a class="btn-text" href = "{% url 'users:login' %} ">Log In</a></button>
+  <button class="btn btn-outline-success" type="button"><a class="btn-text" href = "{% url 'users:register' %} ">Sign Up</a></button>
+</div>
+
+
+{% endif %}
+<body>
+    <h1 >Welcome to the online judge</h1>
+    <form>
+        <button class="working-btn" formaction="/problemset">Click here to practice</button>
+    </form>{% csrf_token %}
+  </body>
+
 
 </html>
